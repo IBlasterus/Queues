@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * A double-ended queue or deque (pronounced “deck”) is a generalization of a stack and a queue that supports adding and
@@ -71,6 +72,7 @@ public class Deque<Item> implements Iterable<Item> {
      * @param item item
      */
     public void addFirst(Item item) {
+        if (item == null) throw new IllegalArgumentException("the item can't be null");
         Node oldFirst = first;
         first = new Node();
         first.item = item;
@@ -85,6 +87,7 @@ public class Deque<Item> implements Iterable<Item> {
      * @param item item
      */
     public void addLast(Item item) {
+        if (item == null) throw new IllegalArgumentException("the item can't be null");
         Node oldLast = last;
         last = new Node();
         last.item = item;
@@ -101,6 +104,7 @@ public class Deque<Item> implements Iterable<Item> {
      * @return item
      */
     public Item removeFirst() {
+        if (isEmpty()) throw new NoSuchElementException("the deque is empty");
         Item item = first.item;
         first = first.next;
         if (isEmpty()) last = null;
@@ -115,6 +119,7 @@ public class Deque<Item> implements Iterable<Item> {
      * @return item
      */
     public Item removeLast() {
+        if (isEmpty()) throw new NoSuchElementException("the deque is empty");
         Item item = last.item;
         last = last.prev;
         if (last == null) first = null;
@@ -132,20 +137,25 @@ public class Deque<Item> implements Iterable<Item> {
         return new DequeIterator();
     }
 
-    private class  DequeIterator implements Iterator<Item> {
+    private class DequeIterator implements Iterator<Item> {
+        private Node current = first;
+
         @Override
         public boolean hasNext() {
-            return false;
+            return current != null;
         }
 
         @Override
         public void remove() {
-
+            throw new UnsupportedOperationException("method unsupported for deque's iterator");
         }
 
         @Override
         public Item next() {
-            return null;
+            Item item = current.item;
+            current = current.next;
+            if (current == null) throw new NoSuchElementException("no more items in iteration");
+            return item;
         }
     }
 
