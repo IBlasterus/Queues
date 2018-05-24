@@ -152,9 +152,9 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
+            if (current == null) throw new NoSuchElementException("no more items in iteration");
             Item item = current.item;
             current = current.next;
-            if (current == null) throw new NoSuchElementException("no more items in iteration");
             return item;
         }
     }

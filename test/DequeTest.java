@@ -3,6 +3,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,6 +49,87 @@ class DequeTest {
         @DisplayName("throws NoSuchElementException when removeLast")
         void throwsExceptionWhenRemoveLast() {
             assertThrows(NoSuchElementException.class, () -> deque.removeLast());
+        }
+
+        @Nested
+        @DisplayName("when new - iterator")
+        class WhenNewIterator {
+            Iterator<Object> iterator;
+
+            @BeforeEach
+            void createDequeIterator() {
+                iterator = deque.iterator();
+            }
+
+            @Test
+            @DisplayName("hasNext can be false")
+            void hasNext() {
+                assertFalse(iterator.hasNext());
+            }
+
+            @Test
+            @DisplayName("throws NoSuchElementException when next")
+            void throwsExceptionWhenNext() {
+                assertThrows(NoSuchElementException.class, () -> iterator.next());
+            }
+
+            @Test
+            @DisplayName("throws UnsupportedOperationException when remove")
+            void throwsExceptionWhenRemove() {
+                assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
+            }
+        }
+
+        @Nested
+        @DisplayName("after addFirst")
+        class AfterAddFirst {
+            String anElement = "an element";
+
+            @BeforeEach
+            void addFirst() {
+                deque.addFirst(anElement);
+            }
+
+            @Test
+            @DisplayName("isEmpty can be false")
+            void isEmpty() {
+                assertFalse(deque.isEmpty());
+            }
+
+            @Test
+            @DisplayName("size can be 1")
+            void size() {
+                assertEquals(1, deque.size());
+            }
+
+            @Nested
+            @DisplayName("after addFirst - iterator")
+            class AfterAddFirstIterator {
+                Iterator<Object> iterator;
+
+                @BeforeEach
+                void createDequeIterator() {
+                    iterator = deque.iterator();
+                }
+
+                @Test
+                @DisplayName("hasNext can be true")
+                void hasNext() {
+                    assertTrue(iterator.hasNext());
+                }
+
+                @Test
+                @DisplayName("throws NoSuchElementException when next")
+                void next() {
+                    assertThrows(NoSuchElementException.class, () -> iterator.next());
+                }
+
+                @Test
+                @DisplayName("throws UnsupportedOperationException when remove")
+                void throwsExceptionWhenRemove() {
+                    assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
+                }
+            }
         }
     }
 }
