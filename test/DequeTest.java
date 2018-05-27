@@ -135,12 +135,6 @@ class DequeTest {
                 void next() {
                     assertEquals(anElement, iterator.next());
                 }
-
-                @Test
-                @DisplayName("throws UnsupportedOperationException when remove")
-                void throwsExceptionWhenRemove() {
-                    assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
-                }
             }
         }
 
@@ -186,12 +180,6 @@ class DequeTest {
                 @DisplayName("next can be anElement")
                 void next() {
                     assertEquals(anElement, iterator.next());
-                }
-
-                @Test
-                @DisplayName("throws UnsupportedOperationException when remove")
-                void throwsExceptionWhenRemove() {
-                    assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
                 }
             }
         }
@@ -251,12 +239,6 @@ class DequeTest {
                                 assertEquals(anElement, lastElement);
                                 assertEquals(numberElements, i);
                             });
-                }
-
-                @Test
-                @DisplayName("throws UnsupportedOperationException when remove")
-                void throwsExceptionWhenRemove() {
-                    assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
                 }
             }
         }
@@ -323,12 +305,6 @@ class DequeTest {
                 @DisplayName("throws NoSuchElementException when next")
                 void throwsExceptionWhenNext() {
                     assertThrows(NoSuchElementException.class, () -> iterator.next());
-                }
-
-                @Test
-                @DisplayName("throws UnsupportedOperationException when remove")
-                void throwsExceptionWhenRemove() {
-                    assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
                 }
             }
         }
