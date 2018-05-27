@@ -51,6 +51,18 @@ class DequeTest {
             assertThrows(NoSuchElementException.class, () -> deque.removeLast());
         }
 
+        @Test
+        @DisplayName("throws IllegalArgumentException when addFirst with null")
+        void throwsExceptionWhenAddFirstWithNull() {
+            assertThrows(IllegalArgumentException.class, () -> deque.addFirst(null));
+        }
+
+        @Test
+        @DisplayName("throws IllegalArgumentException when addLast with null")
+        void throwsExceptionWhenAddLastWithNull() {
+            assertThrows(IllegalArgumentException.class, () -> deque.addLast(null));
+        }
+
         @Nested
         @DisplayName("when new - iterator")
         class WhenNewIterator {
