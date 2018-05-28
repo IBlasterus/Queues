@@ -166,6 +166,6 @@ public class Deque<Item> implements Iterable<Item> {
      * @param args arguments
      */
     public static void main(String[] args) {
-
+        System.exit(0);
     }
 }
